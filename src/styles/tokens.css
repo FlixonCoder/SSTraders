@@ -1,0 +1,26 @@
+/* Brand tokens. Swap these to re-theme the whole site. */
+:root {
+  --ink: #0e1a22;
+  --zinc-900: #1f262b;
+  --zinc-700: #454e54;
+  --zinc-500: #8a949b;
+  --zinc-300: #c3c9cd;
+  --zinc-100: #e9ecee;
+  --paper: #f6f4f0;
+  --signal: #f26a1b;
+  --signal-ink: #b94a0b; /* accent text on light backgrounds (AA on --paper) */
+  --whatsapp: #25d366;
+
+  --font-display: var(--font-bricolage), "Arial Narrow", system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+
+  /* Fluid type scale */
+  --text-hero: clamp(2.75rem, 1.2rem + 7vw, 6.5rem);
+  --text-h1: clamp(2.25rem, 1.4rem + 3.6vw, 4rem);
+  --text-h2: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+  --text-h3: clamp(1.2rem, 1.05rem + 0.7vw, 1.5rem);
+
+  --content-max: 1200px;
+  --space-unit: 8px;
+  --action-bar-h: 64px;
+}
