@@ -1,4 +1,4 @@
-import { siteConfig, fullAddress } from "@/config/site";
+import { siteConfig } from "@/config/site";
 
 /** Build a wa.me URL with URL-encoded prefilled text. Number comes from siteConfig. */
 export function whatsappUrl(message?: string): string {

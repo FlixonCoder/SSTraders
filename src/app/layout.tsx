@@ -21,7 +21,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  ...(siteConfig.siteUrl ? { metadataBase: new URL(siteConfig.siteUrl) } : {}),
+  metadataBase: new URL(siteConfig.siteUrl || "http://localhost:3000"),
   title: {
     default: `Roofing sheets in Nayandahalli, Bengaluru | ${siteConfig.brand.name}`,
     template: `%s | ${siteConfig.brand.name}`,

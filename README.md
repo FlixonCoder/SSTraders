@@ -106,3 +106,16 @@ When real photos of products and the store are available:
 - **`LocalBusiness` Schema:** Embedded in Home and Contact pages using verified business name, Nayandahalli address, phone, and hours. Prices and external ratings are omitted from schema per brief requirements.
 - **`Product` Schema:** Prerendered on each product detail page without fictitious pricing.
 - **Static Routes:** `sitemap.xml` and `robots.txt` are statically generated at build time with `export const dynamic = 'force-static'`.
+
+---
+
+## ☁️ Deploying to Vercel
+
+1. Push your repository to GitHub / GitLab / Bitbucket.
+2. In Vercel, click **Add New Project** and import the repository.
+3. Vercel will automatically detect **Next.js** with default settings:
+   - **Framework Preset:** Next.js
+   - **Build Command:** `next build` (or `npm run build`)
+   - **Output Directory:** Automatically detected
+4. *(Optional)* Under **Environment Variables**, add `NEXT_PUBLIC_SITE_URL` with your custom production domain (e.g. `https://ssagencies.in`). If omitted, Vercel system environment variables (`VERCEL_PROJECT_PRODUCTION_URL` / `VERCEL_URL`) will be used automatically.
+5. Click **Deploy**. Security headers and static asset caching are configured in [vercel.json](./vercel.json).
