@@ -26,23 +26,26 @@ export function ProductCard({ product }: { product: Product }) {
     <div className="group relative flex flex-col justify-between rounded-2xl border border-ink/10 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-ink/25 hover:shadow-md">
       <div>
         <Link href={`/products/${product.slug}`} className="block focus:outline-none">
-          <ProductImage product={product} className="aspect-[4/3] w-full" />
-          <h3 className="font-display mt-4 text-xl font-bold tracking-tight text-ink transition-colors group-hover:text-signal">
+          <ProductImage product={product} className="aspect-square w-full" />
+          <span className="mt-3.5 inline-block text-[11px] font-bold uppercase tracking-wider text-signal-ink">
+            {product.catalogCategory}
+          </span>
+          <h3 className="font-display mt-1 text-xl font-bold tracking-tight text-ink transition-colors group-hover:text-signal">
             {product.name}
           </h3>
         </Link>
         <p className="mt-1.5 text-sm text-zinc-700 line-clamp-2 leading-relaxed">
-          {product.summary}
+          {product.shortDescription}
         </p>
 
-        {product.specs && product.specs.length > 0 && (
+        {product.formAndFinish && product.formAndFinish.length > 0 && (
           <div className="mt-3.5 flex flex-wrap gap-1.5">
-            {product.specs.slice(0, 2).map((s) => (
+            {product.formAndFinish.slice(0, 2).map((item) => (
               <span
-                key={s.label}
+                key={item}
                 className="inline-flex items-center rounded-md bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700"
               >
-                <strong className="font-semibold text-ink mr-1">{s.label}:</strong> {s.value}
+                {item}
               </span>
             ))}
           </div>

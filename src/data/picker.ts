@@ -58,31 +58,47 @@ export function calculateRecommendation(answers: {
 
   if (lightInsulation === "light") {
     return {
-      title: "Translucent & Daylighting Sheets",
-      reason: "For natural illumination without electric lighting during the day.",
-      productSlugs: ["polycarbonate-profile-roofing-sheet", "fibreglass-sheets", "transparent-roofing-sheet"],
+      title: "Polycarbonate & FRP Daylighting Sheets",
+      reason: "For natural illumination across roof spans, skylights, and canopies.",
+      productSlugs: [
+        "polycarbonate-profile-sheets",
+        "frp-roofing-sheets",
+        "polycarbonate-compact-sheets",
+      ],
     };
   }
 
   if (lightInsulation === "insulation") {
     return {
-      title: "PUF Insulated Composite Panels",
-      reason: "Provides superior thermal barriers and acoustic dampening for comfortable interior temperatures.",
-      productSlugs: ["puf-insulated-roofing-panels", "colour-coated-gi-roofing-sheet"],
+      title: "PUF Sandwich Panels & UPVC Tile Sheets",
+      reason: "Provides thermal insulation and weather protection for temperature-controlled roofs and sheds.",
+      productSlugs: [
+        "puf-sandwich-roofing-panels",
+        "upvc-tile-roofing-sheets",
+        "meta-color-sheets",
+      ],
     };
   }
 
   if (tier === "premium") {
     return {
-      title: "Colour Coated Profile Roofing Sheets",
-      reason: "Modern pre-painted corrosion-resistant profile sheets with high aesthetic appeal and long lifespan.",
-      productSlugs: ["colour-coated-gi-roofing-sheet", "precoated-roofing-sheet-duratuf"],
+      title: "Colour-Coated & Architectural Roofing Sheets",
+      reason: "Pre-painted corrosion-resistant profile sheets, curved crimp panels, and tile-profile UPVC sheets.",
+      productSlugs: [
+        "meta-color-sheets",
+        "crimped-curved-roofing-sheets",
+        "upvc-tile-roofing-sheets",
+      ],
     };
   }
 
   return {
-    title: "Galvanised Corrugated (G.C.) & Plain (G.P.) Sheets",
-    reason: "Time-tested zinc-coated sheets offering high structural rigidity and unmatched value per square foot.",
-    productSlugs: ["gc-galvanized-corrugated-sheets", "gi-roofing-sheet-uttam-suraksha", "gp-galvanized-plain-sheets"],
+    title: "Galvanized Corrugated (GC), Plain (GP) & Decking Sheets",
+    reason: "Zinc-coated galvanized steel sheets and deep-rib structural decking panels.",
+    productSlugs: [
+      "gc-sheets-galvanized-corrugated-sheets",
+      "gp-sheets-galvanized-plain-sheets",
+      "gi-decking-sheets",
+    ],
   };
 }

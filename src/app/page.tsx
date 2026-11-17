@@ -17,9 +17,9 @@ import { getLocalBusinessJsonLd } from "@/lib/seo";
 const CATEGORY_ICONS: Record<Category, ProfileArt> = {
   "roofing-sheets": "trapezoid",
   "insulation-daylight": "translucent",
-  "waterproofing": "membrane",
+  "panels-upvc-boards": "panel",
+  "vents-gutters-fasteners": "fastener",
   "pipes-steel": "pipe",
-  "doors-fasteners": "door",
 };
 
 export default function HomePage() {
@@ -120,7 +120,7 @@ export default function HomePage() {
             href="/products"
             className="text-sm font-semibold text-zinc-700 hover:text-ink underline underline-offset-4"
           >
-            View all 20+ materials &rarr;
+            View all {allProducts.length} products &rarr;
           </Link>
         </div>
 

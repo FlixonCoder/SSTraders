@@ -2,7 +2,7 @@
 
 import React, { Suspense, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { getVisibleProducts, type Category } from "@/data/products";
+import { CategoryEnum, getVisibleProducts, type Category } from "@/data/products";
 import { ProductCard } from "@/components/product/ProductCard";
 import { FilterRail } from "@/components/product/FilterRail";
 import { SearchBox } from "@/components/product/SearchBox";
@@ -15,8 +15,9 @@ function ProductCatalog() {
 
   // Derive initial values from URL search params
   const rawCat = searchParams.get("category");
+  const validCategories = CategoryEnum.options as readonly string[];
   const category: Category | "all" =
-    rawCat && ["roofing-sheets", "insulation-daylight", "waterproofing", "pipes-steel", "doors-fasteners"].includes(rawCat)
+    rawCat && validCategories.includes(rawCat)
       ? (rawCat as Category)
       : "all";
 
@@ -57,16 +58,28 @@ function ProductCatalog() {
       // Tag filter
       if (tag && !p.tags.includes(tag)) return false;
 
-      // Search query (name, summary, description, tags, specs)
+      // Search query (name, category, shortDescription, description, formAndFinish, typicalUses, keywords)
       if (query.trim()) {
         const q = query.toLowerCase().trim();
         const matchesName = p.name.toLowerCase().includes(q);
-        const matchesSummary = p.summary.toLowerCase().includes(q);
+        const matchesCatalogCat = p.catalogCategory.toLowerCase().includes(q);
+        const matchesSummary = p.shortDescription.toLowerCase().includes(q);
         const matchesDesc = p.description.toLowerCase().includes(q);
         const matchesTags = p.tags.some((t) => t.toLowerCase().includes(q));
-        const matchesSpecs = p.specs?.some((s) => s.label.toLowerCase().includes(q) || s.value.toLowerCase().includes(q));
+        const matchesKeywords = p.seo.keywords.some((k) => k.toLowerCase().includes(q));
+        const matchesForm = p.formAndFinish.some((f) => f.toLowerCase().includes(q));
+        const matchesUses = p.typicalUses.some((u) => u.toLowerCase().includes(q));
 
-        if (!matchesName && !matchesSummary && !matchesDesc && !matchesTags && !matchesSpecs) {
+        if (
+          !matchesName &&
+          !matchesCatalogCat &&
+          !matchesSummary &&
+          !matchesDesc &&
+          !matchesTags &&
+          !matchesKeywords &&
+          !matchesForm &&
+          !matchesUses
+        ) {
           return false;
         }
       }
@@ -80,10 +93,10 @@ function ProductCatalog() {
       <div className="max-w-3xl">
         <span className="text-xs font-bold uppercase tracking-wider text-signal-ink">Materials Catalogue</span>
         <h1 className="font-display mt-1 text-[length:var(--text-h1)] font-extrabold text-ink">
-          Roofing & Building Supplies
+          Roofing & Building Materials
         </h1>
         <p className="mt-3 text-base text-zinc-700 leading-relaxed">
-          Explore colour coated sheets, GI corrugated sheets, PUF insulated panels, polycarbonate daylighting, pipes, doors, and fasteners stocked in Nayandahalli.
+          Browse our catalogue of 25 roofing sheets, polycarbonate and FRP daylighting panels, insulated PUF panels, UPVC tiles and gutters, ventilators, structural steel, pipes, and fasteners.
         </p>
       </div>
 

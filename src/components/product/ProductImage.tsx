@@ -10,35 +10,25 @@ interface ProductImageProps {
 }
 
 export function ProductImage({ product, className = "", priority = false }: ProductImageProps) {
-  // If a photo path is provided in product data
   if (product.image) {
-    const baseName = product.image.replace(/^\/assets\/source\//, "").replace(/\.[^/.]+$/, "");
-    const srcSetWebp = [
-      `/assets/optimized/${baseName}-320.webp 320w`,
-      `/assets/optimized/${baseName}-640.webp 640w`,
-      `/assets/optimized/${baseName}-960.webp 960w`,
-      `/assets/optimized/${baseName}-1200.webp 1200w`,
-    ].join(", ");
+    const [widthStr, heightStr] = (product.imageDimensions || "1254x1254").split("x");
+    const width = Number(widthStr) || 1254;
+    const height = Number(heightStr) || 1254;
 
     return (
-      <div className={`relative overflow-hidden bg-zinc-100 ${className}`}>
-        <picture>
-          <source type="image/avif" srcSet={srcSetWebp.replace(/webp/g, "avif")} sizes="(max-width: 768px) 100vw, 50vw" />
-          <source type="image/webp" srcSet={srcSetWebp} sizes="(max-width: 768px) 100vw, 50vw" />
-          <Image
-            src={product.image}
-            alt={product.name}
-            width={600}
-            height={400}
-            priority={priority}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-        </picture>
+      <div className={`relative overflow-hidden rounded-xl border border-ink/10 bg-white ${className}`}>
+        <Image
+          src={product.image}
+          alt={product.imageAlt || product.name}
+          width={width}
+          height={height}
+          priority={priority}
+          className="h-full w-full object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+        />
       </div>
     );
   }
 
-  // Visual SVG profile placeholder tile with modern industrial aesthetics
   return (
     <div
       className={`relative flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-b from-zinc-100 to-zinc-300/40 p-6 text-zinc-700 transition-colors duration-200 group-hover:text-ink ${className}`}

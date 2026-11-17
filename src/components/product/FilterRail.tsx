@@ -5,13 +5,13 @@ import { SlidersHorizontal, X, Check } from "lucide-react";
 import { type Category, CATEGORY_LABELS } from "@/data/products";
 
 export const USE_CASE_TAGS = [
-  { id: "roofing", label: "Roofing" },
-  { id: "insulation", label: "Insulation" },
-  { id: "waterproofing", label: "Waterproofing" },
+  { id: "roofing", label: "Roofing Sheets" },
   { id: "daylighting", label: "Daylighting" },
-  { id: "plumbing", label: "Plumbing" },
-  { id: "doors", label: "Doors" },
-  { id: "fasteners", label: "Fasteners" },
+  { id: "polycarbonate", label: "Polycarbonate" },
+  { id: "insulation", label: "Insulated & UPVC" },
+  { id: "ventilation", label: "Vents & Drainage" },
+  { id: "structural", label: "Structural & Steel" },
+  { id: "fasteners", label: "Fasteners & Fittings" },
 ];
 
 interface FilterRailProps {

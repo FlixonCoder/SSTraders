@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react";
+import React, { createContext, useContext, useMemo, useCallback, useSyncExternalStore } from "react";
 import type { EnquiryItem } from "@/lib/whatsapp";
 
 interface EnquiryContextValue {
@@ -14,11 +14,13 @@ interface EnquiryContextValue {
 }
 
 const STORAGE_KEY = "ss_agencies_enquiry_v1";
+const SERVER_SNAPSHOT: EnquiryItem[] = [];
 
-const EnquiryContext = createContext<EnquiryContextValue | null>(null);
+let cachedItems: EnquiryItem[] | null = null;
+const listeners = new Set<() => void>();
 
-function getInitialItems(): EnquiryItem[] {
-  if (typeof window === "undefined") return [];
+function readFromStorage(): EnquiryItem[] {
+  if (typeof window === "undefined") return SERVER_SNAPSHOT;
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
@@ -30,42 +32,69 @@ function getInitialItems(): EnquiryItem[] {
   } catch {
     // localStorage disabled or private browsing
   }
-  return [];
+  return SERVER_SNAPSHOT;
 }
 
-export function EnquiryProvider({ children }: { children: React.ReactNode }) {
-  const [items, setItems] = useState<EnquiryItem[]>(getInitialItems);
+function getSnapshot(): EnquiryItem[] {
+  if (cachedItems === null) {
+    cachedItems = readFromStorage();
+  }
+  return cachedItems;
+}
 
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-    } catch {
-      // Ignore quota or storage errors
+function getServerSnapshot(): EnquiryItem[] {
+  return SERVER_SNAPSHOT;
+}
+
+function setStoreItems(next: EnquiryItem[]) {
+  cachedItems = next;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+  } catch {
+    // Ignore quota or storage errors
+  }
+  listeners.forEach((l) => l());
+}
+
+function subscribe(callback: () => void) {
+  listeners.add(callback);
+  const handleStorage = (e: StorageEvent) => {
+    if (e.key === STORAGE_KEY) {
+      cachedItems = readFromStorage();
+      listeners.forEach((l) => l());
     }
-  }, [items]);
+  };
+  window.addEventListener("storage", handleStorage);
+  return () => {
+    listeners.delete(callback);
+    window.removeEventListener("storage", handleStorage);
+  };
+}
+
+const EnquiryContext = createContext<EnquiryContextValue | null>(null);
+
+export function EnquiryProvider({ children }: { children: React.ReactNode }) {
+  const items = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const addItem = useCallback((item: Omit<EnquiryItem, "quantity"> & { quantity?: string }) => {
-    setItems((prev) => {
-      const exists = prev.find((i) => i.slug === item.slug);
-      if (exists) {
-        return prev;
-      }
-      return [...prev, { ...item, quantity: item.quantity || "1" }];
-    });
+    const prev = getSnapshot();
+    const exists = prev.find((i) => i.slug === item.slug);
+    if (exists) return;
+    setStoreItems([...prev, { ...item, quantity: item.quantity || "1" }]);
   }, []);
 
   const removeItem = useCallback((slug: string) => {
-    setItems((prev) => prev.filter((i) => i.slug !== slug));
+    const prev = getSnapshot();
+    setStoreItems(prev.filter((i) => i.slug !== slug));
   }, []);
 
   const updateItem = useCallback((slug: string, updates: Partial<EnquiryItem>) => {
-    setItems((prev) =>
-      prev.map((i) => (i.slug === slug ? { ...i, ...updates } : i))
-    );
+    const prev = getSnapshot();
+    setStoreItems(prev.map((i) => (i.slug === slug ? { ...i, ...updates } : i)));
   }, []);
 
   const clear = useCallback(() => {
-    setItems([]);
+    setStoreItems([]);
   }, []);
 
   const isInEnquiry = useCallback((slug: string) => items.some((i) => i.slug === slug), [items]);
