@@ -21,7 +21,7 @@ export const copy = {
     headline: "Roofing sheets, stocked since 1967.",
     subhead: "GI, colour coated, insulated, polycarbonate and more, from our Nayandahalli store.",
     proofSince: "Since 1967",
-    proofHours: "Mon-Sat 10:30-7:00",
+    proofHours: "Mon-Sat 10:30-6:00",
   },
   footer: {
     explore: "Explore",

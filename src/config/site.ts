@@ -49,7 +49,6 @@ export const siteConfig = {
     // Primary phone and WhatsApp (digits with country code for wa.me).
     primary: { display: "+91 98860 67098", tel: "+919886067098", wa: "919886067098" },
     landline: { display: "080 2670 5406", tel: "+918026705406" },
-    office: { display: "+91 98459 36391", tel: "+919845936391" },
   },
 
   // TODO(OPEN): primary public email unresolved. Do NOT display any email.
@@ -58,17 +57,17 @@ export const siteConfig = {
   hours: {
     timeZone: "Asia/Kolkata",
     days: {
-      mon: { open: "10:30", close: "19:00" },
-      tue: { open: "10:30", close: "19:00" },
-      wed: { open: "10:30", close: "19:00" },
-      thu: { open: "10:30", close: "19:00" },
-      fri: { open: "10:30", close: "19:00" },
-      sat: { open: "10:30", close: "19:00" },
+      mon: { open: "10:30", close: "18:00" },
+      tue: { open: "10:30", close: "18:00" },
+      wed: { open: "10:30", close: "18:00" },
+      thu: { open: "10:30", close: "18:00" },
+      fri: { open: "10:30", close: "18:00" },
+      sat: { open: "10:30", close: "18:00" },
       sun: null,
     } as Record<DayKey, DayHours>,
   },
 
-  paymentModes: ["Cash", "Cheque / DD", "Visa / Mastercard / RuPay", "Amex"],
+  paymentModes: ["DD", "Cash", "UPI"],
 
   rating: {
     value: "4.4",

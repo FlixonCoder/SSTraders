@@ -38,9 +38,9 @@ Sources: **[Site]** = old website draft, **[JD]** = JustDial listing (claimed li
 | Address | No. 15, Mysore Main Road (Bangalore-Mysore Highway), Nayandahalli, Bengaluru 560039. Landmark: near Nayandahalli Metro Pillar 463. Old site also writes "ITI Layout 3rd Phase" | Both |
 | Primary phone / WhatsApp | +91 98860 67098 | Both |
 | Staff landline | 080 2670 5406 | Site |
-| Office mobile | +91 98459 36391 | Site |
-| Hours | Mon-Sat 10:30 am to 7:00 pm, Sunday closed | JD |
-| Payment accepted | Cash, cheque/DD, Visa/Mastercard/RuPay, Amex | JD |
+| Office mobile | Discontinued (+91 98459 36391) | Site |
+| Hours | Mon-Sat 10:30 am to 6:00 pm, Sunday closed | JD |
+| Payment accepted | DD, Cash, UPI | Verified |
 | Rating | 4.4 from 18 ratings on JustDial (no written review text available) | JD |
 | Delivery | "South India only" | Site |
 | Order process (old site) | Send enquiry, get a confirmation call, delivery arranged. Replies promised within 24 hours | Site |

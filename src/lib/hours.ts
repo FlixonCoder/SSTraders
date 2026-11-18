@@ -59,4 +59,4 @@ export function hoursRows(): { day: string; value: string }[] {
   });
 }
 
-export const HOURS_SHORT = "Mon-Sat 10:30 am to 7:00 pm, Sunday closed";
+export const HOURS_SHORT = "Mon-Sat 10:30 am to 6:00 pm, Sunday closed";

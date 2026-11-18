@@ -171,16 +171,10 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Additional Phones & Payment Modes */}
+          {/* Landline & Payment Modes */}
           <div className="rounded-3xl border border-ink/10 bg-white p-6 shadow-xs">
-            <h3 className="font-display text-lg font-bold text-ink">Additional Phone Lines</h3>
+            <h3 className="font-display text-lg font-bold text-ink">Landline Contact</h3>
             <ul className="tabular mt-4 space-y-2 text-sm text-zinc-700">
-              <li className="flex justify-between">
-                <span>Office Mobile:</span>
-                <a className="font-semibold text-ink hover:text-signal" href={telUrl(phones.office.tel)}>
-                  {phones.office.display}
-                </a>
-              </li>
               <li className="flex justify-between">
                 <span>Staff Landline:</span>
                 <a className="font-semibold text-ink hover:text-signal" href={telUrl(phones.landline.tel)}>

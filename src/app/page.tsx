@@ -306,9 +306,9 @@ export default function HomePage() {
               <div className="grid size-12 place-items-center rounded-xl bg-ink text-signal">
                 <CreditCard size={24} aria-hidden="true" />
               </div>
-              <h3 className="font-display mt-4 text-lg font-bold text-ink">Flexible Payment</h3>
+              <h3 className="font-display mt-4 text-lg font-bold text-ink">Payment Options</h3>
               <p className="mt-1 text-sm text-zinc-700 leading-relaxed">
-                Pay conveniently with Cash, Cheque, DD, Visa, Mastercard, RuPay, or Amex.
+                Pay conveniently with DD, Cash, or UPI.
               </p>
             </div>
 
@@ -318,7 +318,7 @@ export default function HomePage() {
               </div>
               <h3 className="font-display mt-4 text-lg font-bold text-ink">6 Days Open</h3>
               <p className="mt-1 text-sm text-zinc-700 leading-relaxed">
-                Open Monday to Saturday 10:30 am to 7:00 pm. Responsive replies within 24 hours.
+                Open Monday to Saturday 10:30 am to 6:00 pm. Responsive replies within 24 hours.
               </p>
             </div>
           </div>
@@ -422,12 +422,6 @@ export default function HomePage() {
                     <span>Primary Mobile / WhatsApp:</span>
                     <a className="font-bold text-paper hover:text-signal" href={telUrl(siteConfig.phones.primary.tel)}>
                       {siteConfig.phones.primary.display}
-                    </a>
-                  </li>
-                  <li className="flex items-center justify-between pb-2 border-b border-zinc-800">
-                    <span>Office Mobile:</span>
-                    <a className="font-bold text-paper hover:text-signal" href={telUrl(siteConfig.phones.office.tel)}>
-                      {siteConfig.phones.office.display}
                     </a>
                   </li>
                   <li className="flex items-center justify-between">

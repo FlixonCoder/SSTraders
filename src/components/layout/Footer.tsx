@@ -60,7 +60,6 @@ export function Footer() {
             </div>
             <ul className="tabular mt-4 space-y-1 text-sm text-zinc-300">
               <li><a className="inline-flex min-h-10 items-center hover:text-signal" href={telUrl(phones.primary.tel)}>{phones.primary.display}</a></li>
-              <li><a className="inline-flex min-h-10 items-center hover:text-signal" href={telUrl(phones.office.tel)}>{phones.office.display}</a></li>
               <li><a className="inline-flex min-h-10 items-center hover:text-signal" href={telUrl(phones.landline.tel)}>{phones.landline.display}</a></li>
             </ul>
           </div>
