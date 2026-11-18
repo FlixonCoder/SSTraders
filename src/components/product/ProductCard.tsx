@@ -26,7 +26,14 @@ export function ProductCard({ product }: { product: Product }) {
     <div className="group relative flex flex-col justify-between rounded-2xl border border-ink/10 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-ink/25 hover:shadow-md">
       <div>
         <Link href={`/products/${product.slug}`} className="block focus:outline-none">
-          <ProductImage product={product} className="aspect-square w-full" />
+          <div className="relative">
+            <ProductImage product={product} className="aspect-square w-full" />
+            {product.featured && (
+              <span className="absolute top-3 left-3 rounded-full bg-ink/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-signal shadow-xs">
+                Featured
+              </span>
+            )}
+          </div>
           <span className="mt-3.5 inline-block text-[11px] font-bold uppercase tracking-wider text-signal-ink">
             {product.catalogCategory}
           </span>

@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { MessageCircle, Phone, MapPin, Clock, ArrowRight, ShieldCheck, Truck, CreditCard } from "lucide-react";
 import { siteConfig, fullAddress } from "@/config/site";
@@ -20,6 +21,29 @@ const CATEGORY_ICONS: Record<Category, ProfileArt> = {
   "panels-upvc-boards": "panel",
   "vents-gutters-fasteners": "fastener",
   "pipes-steel": "pipe",
+};
+
+const CATEGORY_ASSETS: Record<Category, { src: string; alt: string }> = {
+  "roofing-sheets": {
+    src: "/assets/meta_color_sheets.png",
+    alt: "Meta Color pre-painted roofing sheets",
+  },
+  "insulation-daylight": {
+    src: "/assets/frp_sheets.png",
+    alt: "Translucent FRP and polycarbonate daylighting sheets",
+  },
+  "panels-upvc-boards": {
+    src: "/assets/puff_or_sandwhich_sheets.png",
+    alt: "PUF insulated sandwich roofing panels",
+  },
+  "vents-gutters-fasteners": {
+    src: "/assets/aluminium_vents.png",
+    alt: "Aluminium turbine roof ventilators and accessories",
+  },
+  "pipes-steel": {
+    src: "/assets/ms_round_pipes.png",
+    alt: "MS round pipes and structural steel sections",
+  },
 };
 
 export default function HomePage() {
@@ -52,53 +76,100 @@ export default function HomePage() {
         />
 
         <div className="container-page relative z-10">
-          <div className="max-w-4xl">
-            {/* Proof strip */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-semibold uppercase tracking-wider text-zinc-300">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-zinc-900/80 px-3 py-1 border border-zinc-700">
-                <span className="size-2 rounded-full bg-signal" />
-                {copy.hero.proofSince}
-              </span>
-              <a
-                href={siteConfig.rating.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full bg-zinc-900/80 px-3 py-1 border border-zinc-700 hover:text-signal transition"
-              >
-                ★ {siteConfig.rating.value} on JustDial (18 ratings)
-              </a>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-zinc-900/80 px-3 py-1 border border-zinc-700">
-                <Clock size={12} />
-                {copy.hero.proofHours}
-              </span>
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
+              {/* Proof strip */}
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-semibold uppercase tracking-wider text-zinc-300">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-zinc-900/80 px-3 py-1 border border-zinc-700">
+                  <span className="size-2 rounded-full bg-signal" />
+                  {copy.hero.proofSince}
+                </span>
+                <a
+                  href={siteConfig.rating.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-zinc-900/80 px-3 py-1 border border-zinc-700 hover:text-signal transition"
+                >
+                  ★ {siteConfig.rating.value} on JustDial (18 ratings)
+                </a>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-zinc-900/80 px-3 py-1 border border-zinc-700">
+                  <Clock size={12} />
+                  {copy.hero.proofHours}
+                </span>
+              </div>
+
+              <h1 className="font-display mt-6 text-[length:var(--text-hero)] font-extrabold tracking-tight leading-none text-paper">
+                {copy.hero.headline}
+              </h1>
+
+              <p className="mt-6 max-w-2xl text-lg sm:text-xl text-zinc-300 font-medium leading-relaxed">
+                {copy.hero.subhead}
+              </p>
+
+              <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
+                <ButtonLink
+                  variant="whatsapp"
+                  href={whatsappUrl(GENERIC_ENQUIRY)}
+                  className="text-base font-bold shadow-lg shadow-whatsapp/20"
+                >
+                  <MessageCircle size={20} aria-hidden="true" />
+                  {copy.cta.whatsappUs}
+                </ButtonLink>
+
+                <ButtonLink
+                  variant="outline-light"
+                  href="/products"
+                  className="text-base font-semibold"
+                >
+                  {copy.cta.browseProducts}
+                  <ArrowRight size={18} aria-hidden="true" />
+                </ButtonLink>
+              </div>
             </div>
 
-            <h1 className="font-display mt-6 text-[length:var(--text-hero)] font-extrabold tracking-tight leading-none text-paper">
-              {copy.hero.headline}
-            </h1>
-
-            <p className="mt-6 max-w-2xl text-lg sm:text-xl text-zinc-300 font-medium leading-relaxed">
-              {copy.hero.subhead}
-            </p>
-
-            <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
-              <ButtonLink
-                variant="whatsapp"
-                href={whatsappUrl(GENERIC_ENQUIRY)}
-                className="text-base font-bold shadow-lg shadow-whatsapp/20"
-              >
-                <MessageCircle size={20} aria-hidden="true" />
-                {copy.cta.whatsappUs}
-              </ButtonLink>
-
-              <ButtonLink
-                variant="outline-light"
-                href="/products"
-                className="text-base font-semibold"
-              >
-                {copy.cta.browseProducts}
-                <ArrowRight size={18} aria-hidden="true" />
-              </ButtonLink>
+            {/* Hero Featured Product Showcase */}
+            <div className="lg:col-span-5">
+              <div className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-4 sm:p-5 backdrop-blur-xs">
+                <div className="flex items-center justify-between mb-3.5">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-signal">
+                    Featured Stock Highlights
+                  </span>
+                  <Link
+                    href="/products"
+                    className="text-xs font-semibold text-zinc-300 hover:text-paper transition"
+                  >
+                    All {allProducts.length} items &rarr;
+                  </Link>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  {featured.slice(0, 4).map((p) => (
+                    <Link
+                      key={p.slug}
+                      href={`/products/${p.slug}`}
+                      className="group flex flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-950/70 p-2.5 transition-all hover:-translate-y-0.5 hover:border-signal/60"
+                    >
+                      <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-white p-2">
+                        <Image
+                          src={p.image}
+                          alt={p.imageAlt || p.name}
+                          width={320}
+                          height={320}
+                          priority
+                          className="size-full object-contain transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
+                      <div className="mt-2.5 px-0.5">
+                        <span className="block text-[10px] font-semibold uppercase tracking-wider text-zinc-400 line-clamp-1">
+                          {p.catalogCategory}
+                        </span>
+                        <span className="font-display mt-0.5 block text-xs sm:text-sm font-bold text-paper group-hover:text-signal transition-colors line-clamp-1">
+                          {p.name}
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -134,8 +205,19 @@ export default function HomePage() {
                 className="group flex flex-col justify-between rounded-2xl border border-ink/10 bg-white p-5 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-ink/30 hover:shadow-md"
               >
                 <div>
-                  <div className="flex aspect-[16/10] w-full items-center justify-center rounded-xl bg-zinc-100 p-4 text-zinc-700 transition-colors group-hover:bg-zinc-900 group-hover:text-paper">
-                    <ProductArt art={CATEGORY_ICONS[cat]} className="h-10 w-auto" />
+                  <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden rounded-xl border border-ink/10 bg-white p-2">
+                    <Image
+                      src={CATEGORY_ASSETS[cat].src}
+                      alt={CATEGORY_ASSETS[cat].alt}
+                      width={400}
+                      height={400}
+                      className="size-full object-contain transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <span className="
+                      absolute bottom-2 right-2 flex size-7 items-center justify-center rounded-lg bg-zinc-900/85 p-1.5 text-paper shadow-xs
+                    ">
+                      <ProductArt art={CATEGORY_ICONS[cat]} className="h-3.5 w-auto" />
+                    </span>
                   </div>
                   <h3 className="font-display mt-4 text-lg font-bold text-ink group-hover:text-signal transition-colors">
                     {CATEGORY_LABELS[cat]}

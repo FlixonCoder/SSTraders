@@ -165,7 +165,6 @@ const PRODUCT_ENRICHMENT: Record<
     category: "insulation-daylight",
     tags: ["roofing", "daylighting", "polycarbonate"],
     profileArt: "translucent",
-    featured: true,
   },
   "polycarbonate-compact-sheets": {
     category: "insulation-daylight",
@@ -176,6 +175,7 @@ const PRODUCT_ENRICHMENT: Record<
     category: "insulation-daylight",
     tags: ["daylighting", "polycarbonate"],
     profileArt: "translucent",
+    featured: true,
   },
   "polycarbonate-embossed-colour-sheets": {
     category: "insulation-daylight",
@@ -322,8 +322,26 @@ export function getVisibleProducts(): Product[] {
   return products.filter((p) => p.visible);
 }
 
+const FEATURED_PRODUCT_IDS = [
+  "meta-color-sheets",
+  "puf-sandwich-sheets",
+  "gc-sheets",
+  "upvc-tile-sheets",
+  "textured-polycarbonate-sheets",
+  "frp-sheets",
+] as const;
+
 export function getFeaturedProducts(): Product[] {
-  return products.filter((p) => p.visible && p.featured);
+  const featuredMap = new Map(
+    products.filter((p) => p.visible && p.featured).map((p) => [p.id, p])
+  );
+  const ordered = FEATURED_PRODUCT_IDS.map((id) => featuredMap.get(id)).filter(
+    (p): p is Product => Boolean(p)
+  );
+  const remaining = products.filter(
+    (p) => p.visible && p.featured && !FEATURED_PRODUCT_IDS.includes(p.id as (typeof FEATURED_PRODUCT_IDS)[number])
+  );
+  return [...ordered, ...remaining];
 }
 
 export function getProductBySlug(slug: string): Product | undefined {

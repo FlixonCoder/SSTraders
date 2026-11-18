@@ -61,9 +61,9 @@ export function calculateRecommendation(answers: {
       title: "Polycarbonate & FRP Daylighting Sheets",
       reason: "For natural illumination across roof spans, skylights, and canopies.",
       productSlugs: [
-        "polycarbonate-profile-sheets",
+        "textured-polycarbonate-sheets",
         "frp-roofing-sheets",
-        "polycarbonate-compact-sheets",
+        "polycarbonate-profile-sheets",
       ],
     };
   }

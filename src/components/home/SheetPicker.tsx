@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Check, ArrowRight, RotateCcw, MessageCircle } from "lucide-react";
 import { PICKER_QUESTIONS, calculateRecommendation } from "@/data/picker";
@@ -121,12 +122,30 @@ export function SheetPicker() {
                     key={p.slug}
                     className="flex items-center justify-between gap-3 rounded-xl border border-ink/10 bg-white p-3 shadow-xs"
                   >
-                    <div>
-                      <Link href={`/products/${p.slug}`} className="font-display text-sm font-bold text-ink hover:text-signal line-clamp-1">
-                        {p.name}
-                      </Link>
-                      <span className="text-xs text-zinc-500">{p.summary}</span>
-                    </div>
+                    <Link
+                      href={`/products/${p.slug}`}
+                      className="flex min-w-0 flex-1 items-center gap-3 group"
+                    >
+                      {p.image && (
+                        <div className="size-14 shrink-0 overflow-hidden rounded-lg border border-ink/10 bg-white p-1">
+                          <Image
+                            src={p.image}
+                            alt={p.imageAlt || p.name}
+                            width={112}
+                            height={112}
+                            className="size-full object-contain transition-transform duration-200 group-hover:scale-105"
+                          />
+                        </div>
+                      )}
+                      <div className="min-w-0">
+                        <span className="font-display block text-sm font-bold text-ink group-hover:text-signal line-clamp-1">
+                          {p.name}
+                        </span>
+                        <span className="block text-xs text-zinc-500 line-clamp-1">
+                          {p.summary}
+                        </span>
+                      </div>
+                    </Link>
                     <div className="flex items-center gap-1.5 shrink-0">
                       <Link
                         href={`/products/${p.slug}`}
